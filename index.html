@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#faf6f0" />
+    <meta name="description" content="Look up European bird names in English, Lithuanian and Latin from a single search box." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <title>Birdlator</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">Field dictionary · Europe</p>
+        <h1>Birdlator</h1>
+        <p class="tagline">One name in, three names out — English, Lithuanian, Latin.</p>
+        <div class="divider" aria-hidden="true"><span></span></div>
+      </header>
+
+      <div class="searchbox">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <circle cx="7" cy="7" r="4.5" />
+          <path d="M10.5 10.5 14 14" stroke-linecap="round" />
+        </svg>
+        <input
+          id="q"
+          type="search"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+          placeholder="Name a bird… great tit, didžioji zylė, Parus major"
+          aria-label="Search bird names"
+        />
+        <button id="clear" type="button" aria-label="Clear search" hidden>Clear</button>
+      </div>
+
+      <p id="status" class="status" aria-live="polite"></p>
+      <ul id="results" class="results"></ul>
+
+      <footer>
+        Names from the <a href="https://www.worldbirdnames.org/" target="_blank" rel="noopener">IOC World Bird List</a> v15.2 ·
+        species scope: <a href="https://en.wikipedia.org/wiki/List_of_birds_of_Europe" target="_blank" rel="noopener">birds of Europe</a>
+      </footer>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

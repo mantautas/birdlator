@@ -1,0 +1,31 @@
+{
+  "name": "birdlator",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "data": "node scripts/build-data.mjs",
+    "data:europe": "node scripts/fetch-europe-list.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mantautas/birdlator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/mantautas/birdlator/issues"
+  },
+  "homepage": "https://github.com/mantautas/birdlator#readme",
+  "private": "true",
+  "devDependencies": {
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0",
+    "vite-plugin-pwa": "^1.3.0",
+    "xlsx": "^0.18.5"
+  }
+}

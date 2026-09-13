@@ -1,0 +1,381 @@
+/* Birdlator — visual language ported from the Karvelis design tokens
+   (archival / field-journal palette and type). */
+
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("/fonts/InstrumentSerif-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/Geist-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/Geist-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/GeistMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/GeistMono-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+  --parchment: #faf6f0;
+  --card: #ebe3d5;
+  --hairline: #d4c9bf;
+  --ink: #2a2723;
+  --ink-soft: #524b41;
+  --ink-muted: #6b645d;
+  --accent: #a84a32;
+  --sage: #4f6b5c;
+  --cta: #c28e40;
+  --night: #121411;
+  --cream: #ebe7e0;
+  --plate: #f6efe2;
+
+  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-body: "Geist", system-ui, -apple-system, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --radius: 4px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--parchment);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 3rem;
+}
+
+/* ---- Eyebrow / mono labels ------------------------------------------- */
+
+.eyebrow,
+.label,
+.status,
+.meta,
+.tag,
+.links a,
+.copy,
+footer {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ---- Header ------------------------------------------------------------ */
+
+header {
+  margin-bottom: 0.75rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.25rem;
+  font-size: 11px;
+  color: var(--accent);
+}
+
+h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 2.25rem;
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+}
+
+.tagline {
+  margin: 0.25rem 0 0.9rem;
+  font-size: 14px;
+  color: var(--ink-muted);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--hairline);
+}
+
+.divider span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--hairline);
+}
+
+/* ---- Search ------------------------------------------------------------ */
+
+.searchbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 1rem;
+  padding: 0 12px;
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+}
+
+.searchbox:focus-within {
+  border-color: var(--ink-muted);
+}
+
+.searchbox svg {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  color: var(--ink-muted);
+}
+
+#q {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  font-size: 16px;
+  padding: 12px 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+#q::placeholder {
+  color: var(--ink-muted);
+  opacity: 0.8;
+}
+
+#q::-webkit-search-cancel-button {
+  display: none;
+}
+
+#clear {
+  flex: 0 0 auto;
+  border: 0;
+  background: transparent;
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 4px 0 4px 8px;
+  cursor: pointer;
+}
+
+#clear:hover {
+  color: var(--accent);
+}
+
+/* ---- Status ------------------------------------------------------------ */
+
+.status {
+  font-size: 11px;
+  color: var(--ink-muted);
+  margin: 0.7rem 0 0.6rem;
+  min-height: 1.2em;
+}
+
+/* ---- Results ----------------------------------------------------------- */
+
+.results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 3px 0;
+}
+
+.row + .row {
+  border-top: 1px solid color-mix(in srgb, var(--hairline) 55%, transparent);
+}
+
+.label {
+  flex: 0 0 2.4rem;
+  font-size: 10px;
+  color: var(--ink-muted);
+}
+
+.row-hit .label {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.name {
+  flex: 1;
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.row-en .name {
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.row-lt .name {
+  font-size: 15px;
+}
+
+.row-sci .name {
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+
+.name.missing {
+  color: var(--ink-muted);
+}
+
+mark {
+  background: transparent;
+  color: inherit;
+  box-shadow: inset 0 -0.4em color-mix(in srgb, var(--cta) 38%, transparent);
+  border-radius: 1px;
+}
+
+.copy {
+  flex: 0 0 auto;
+  border: 0;
+  background: transparent;
+  color: var(--ink-muted);
+  cursor: pointer;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 0 2px 6px;
+  opacity: 0.55;
+}
+
+.card:hover .copy,
+.copy:focus-visible {
+  opacity: 1;
+}
+
+.copy:hover {
+  color: var(--accent);
+}
+
+.copy.done {
+  color: var(--sage);
+  opacity: 1;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--hairline);
+  font-size: 10px;
+  color: var(--ink-muted);
+}
+
+.tag {
+  color: var(--sage);
+  font-weight: 700;
+}
+
+.tag.vagrant {
+  color: var(--accent);
+}
+
+.links {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+}
+
+.links a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.links a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--hairline);
+}
+
+/* ---- Footer ------------------------------------------------------------ */
+
+footer {
+  margin-top: 2.5rem;
+  padding-top: 12px;
+  border-top: 1px solid var(--hairline);
+  font-size: 10px;
+  line-height: 1.7;
+  color: var(--ink-muted);
+}
+
+footer a {
+  color: var(--ink-soft);
+  text-decoration: underline;
+  text-decoration-color: var(--hairline);
+}
+
+footer a:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 420px) {
+  main {
+    padding: 1.25rem 1rem 3rem;
+  }
+  .links {
+    margin-left: 0;
+    flex-basis: 100%;
+  }
+}
