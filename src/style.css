@@ -61,17 +61,26 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  min-height: 100%;
+}
+
 body {
   margin: 0;
+  min-height: 100dvh;
   background: var(--parchment);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
 }
 
 main {
+  display: flex;
+  flex-direction: column;
   max-width: 640px;
+  min-height: 100dvh;
   margin: 0 auto;
-  padding: 1.5rem 1.5rem 3rem;
+  padding: 1.5rem 1.5rem 1.5rem;
 }
 
 /* ---- Eyebrow / mono labels ------------------------------------------- */
@@ -111,16 +120,11 @@ h1 {
   color: var(--ink);
 }
 
-.tagline {
-  margin: 0.25rem 0 0.9rem;
-  font-size: 14px;
-  color: var(--ink-muted);
-}
-
 .divider {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-top: 0.75rem;
 }
 
 .divider::before,
@@ -144,42 +148,50 @@ h1 {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 1rem;
-  padding: 0 12px;
-  background: var(--card);
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius);
+  gap: 12px;
+  margin-top: 1.25rem;
+  padding: 0 4px;
+  background: color-mix(in srgb, #fff 55%, var(--parchment));
+  border: 0;
+  border-radius: 2px;
+  transition: background 0.15s ease;
 }
 
 .searchbox:focus-within {
-  border-color: var(--ink-muted);
+  background: color-mix(in srgb, #fff 82%, var(--parchment));
 }
 
 .searchbox svg {
   flex: 0 0 auto;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   color: var(--ink-muted);
+  opacity: 0.7;
 }
 
 #q {
   flex: 1;
   min-width: 0;
-  font: inherit;
-  font-size: 16px;
-  padding: 12px 0;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  padding: 1.05rem 0;
   border: 0;
   background: transparent;
   color: var(--ink);
+  caret-color: var(--ink);
   outline: none;
   -webkit-appearance: none;
   appearance: none;
 }
 
 #q::placeholder {
-  color: var(--ink-muted);
-  opacity: 0.8;
+  font-family: var(--font-display);
+  font-size: inherit;
+  letter-spacing: inherit;
+  color: color-mix(in srgb, var(--ink) 38%, transparent);
+  opacity: 1;
 }
 
 #q::-webkit-search-cancel-button {
@@ -203,24 +215,30 @@ h1 {
   color: var(--accent);
 }
 
-/* ---- Status ------------------------------------------------------------ */
-
-.status {
-  font-size: 11px;
-  color: var(--ink-muted);
-  margin: 0.7rem 0 0.6rem;
-  min-height: 1.2em;
-}
-
 /* ---- Results ----------------------------------------------------------- */
 
 .results {
   list-style: none;
-  margin: 0;
+  margin: 0.9rem 0 0;
   padding: 0;
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+/* ---- Bottom meta ------------------------------------------------------- */
+
+.bottom {
+  margin-top: auto;
+  padding-top: 1.5rem;
+}
+
+.status {
+  font-size: 11px;
+  color: var(--ink-muted);
+  margin: 0 0 0.45rem;
+  min-height: 1.2em;
 }
 
 .card {
@@ -352,9 +370,9 @@ mark {
 /* ---- Footer ------------------------------------------------------------ */
 
 footer {
-  margin-top: 2.5rem;
-  padding-top: 12px;
-  border-top: 1px solid var(--hairline);
+  margin: 0;
+  padding: 0;
+  border: 0;
   font-size: 10px;
   line-height: 1.7;
   color: var(--ink-muted);

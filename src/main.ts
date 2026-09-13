@@ -19,6 +19,29 @@ const STATUS_LABEL: Record<string, string> = {
   Ext: "extinct",
 };
 
+/** Default eBird map viewport (Vilnius area) + year-round / all-years filters. */
+function ebirdMapUrl(speciesCode: string): string {
+  const q = new URLSearchParams({
+    neg: "true",
+    "env.minX": "25.037886585614714",
+    "env.minY": "54.60279668057792",
+    "env.maxX": "25.436140980145964",
+    "env.maxY": "54.72808831662741",
+    zh: "true",
+    gp: "false",
+    ev: "Z",
+    excludeExX: "false",
+    excludeExAll: "false",
+    mr: "1-12",
+    bmo: "1",
+    emo: "12",
+    yr: "all",
+    byr: "1900",
+    eyr: String(new Date().getFullYear()),
+  });
+  return `https://ebird.org/map/${encodeURIComponent(speciesCode)}?${q}`;
+}
+
 function render(query: string) {
   const q = query.trim();
   clearBtn.hidden = q === "";
@@ -99,6 +122,9 @@ function card(m: Match): HTMLElement {
   if (m.bird.lt) {
     const title = m.bird.lt.charAt(0).toUpperCase() + m.bird.lt.slice(1);
     links.append(link(`https://lt.wikipedia.org/wiki/${encodeURIComponent(title.replace(/ /g, "_"))}`, "Wiki LT"));
+  }
+  if (m.bird.ebird) {
+    links.append(link(ebirdMapUrl(m.bird.ebird), "eBird map"));
   }
   meta.append(links);
   li.append(meta);

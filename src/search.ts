@@ -8,6 +8,8 @@ export interface Bird {
   family: string;
   /** Wikipedia status tags: A = accidental/vagrant, I = introduced, E = endemic, Ex/Ext = extinct */
   status: string;
+  /** eBird species code, e.g. "gretit1" for Great Tit — used for map/species links */
+  ebird: string;
 }
 
 export type Field = "en" | "lt" | "sci";
