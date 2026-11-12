@@ -1,5 +1,5 @@
 import "./style.css";
-import data from "../public/birds.json";
+import data from "./birds.json";
 import { BirdIndex, FIELDS, type Bird, type Field, type Match, type Range } from "./search";
 
 const index = new BirdIndex((data as { birds: Bird[] }).birds);
@@ -8,6 +8,8 @@ const input = document.querySelector<HTMLInputElement>("#q")!;
 const results = document.querySelector<HTMLElement>("#results")!;
 const status = document.querySelector<HTMLElement>("#status")!;
 const clearBtn = document.querySelector<HTMLButtonElement>("#clear")!;
+
+const MAX_RESULTS = 50;
 
 const LABEL: Record<Field, string> = { en: "EN", lt: "LT", sci: "LAT" };
 
@@ -50,11 +52,14 @@ function render(query: string) {
     status.textContent = `${index.size} species catalogued · English, Lithuanian or Latin`;
     return;
   }
-  const matches = index.search(q, 50);
-  status.textContent = matches.length
-    ? `${matches.length === 50 ? "50+" : matches.length} match${matches.length === 1 ? "" : "es"}`
+  // Ask for one extra so we can tell "exactly 50" from "more than 50".
+  const matches = index.search(q, MAX_RESULTS + 1);
+  const more = matches.length > MAX_RESULTS;
+  const shown = matches.slice(0, MAX_RESULTS);
+  status.textContent = shown.length
+    ? `${shown.length}${more ? "+" : ""} match${shown.length === 1 ? "" : "es"}`
     : "No matches";
-  results.replaceChildren(...matches.map(card));
+  results.replaceChildren(...shown.map(card));
 }
 
 function card(m: Match): HTMLElement {
@@ -92,9 +97,13 @@ function card(m: Match): HTMLElement {
       copy.setAttribute("aria-label", `Copy ${value}`);
       copy.textContent = "Copy";
       copy.addEventListener("click", async () => {
-        await navigator.clipboard.writeText(value);
-        copy.textContent = "Copied";
-        copy.classList.add("done");
+        try {
+          await navigator.clipboard.writeText(value);
+          copy.textContent = "Copied";
+          copy.classList.add("done");
+        } catch {
+          copy.textContent = "Failed";
+        }
         setTimeout(() => {
           copy.textContent = "Copy";
           copy.classList.remove("done");

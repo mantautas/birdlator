@@ -1,4 +1,4 @@
-// Builds public/birds.json from:
+// Builds src/birds.json from:
 //   data/ioc-multilingual-15.2.xlsx  (IOC World Bird List, multilingual version)
 //   data/europe-species.tsv          (which species to include; from fetch-europe-list.mjs)
 //   data/overrides.json              (manual fixes / additions)
@@ -77,9 +77,9 @@ for (const x of extra) birds.push({ status: "", order: "", family: "", ebird: ""
 const seen = new Set();
 const out = birds.filter((b) => (seen.has(b.sci) ? false : (seen.add(b.sci), true)));
 
-await mkdir(p("public"), { recursive: true });
+await mkdir(p("src"), { recursive: true });
 await writeFile(
-  p("public/birds.json"),
+  p("src/birds.json"),
   JSON.stringify({
     source: "IOC World Bird List v15.2; species list: Wikipedia 'List of birds of Europe'; eBird taxonomy",
     count: out.length,
@@ -87,7 +87,7 @@ await writeFile(
   }),
 );
 
-console.log(`Wrote ${out.length} birds to public/birds.json`);
+console.log(`Wrote ${out.length} birds to src/birds.json`);
 if (missing.length) {
   console.log(`\n${missing.length} Europe-list species not found in IOC (add to overrides.synonyms):`);
   for (const m of missing) console.log(`  ${m.sci}\t${m.en}`);
